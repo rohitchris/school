@@ -307,7 +307,7 @@ CREATE TABLE `setting` (
 --  
 
 INSERT INTO `setting` (`id`, `option_name`, `option_value`) VALUES  
-(1, 'site_name', 'Open Source Student Management System'),  
+(1, 'site_name', 'Student Management System'),  
 (2, 'sort_name', 'EMS'), 
 (3, 'address', 'Dhaka, Bangladesh'), 
 (4, 'main_logo', 'techserm_full_logo.jpg'),  
