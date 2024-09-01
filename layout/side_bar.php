@@ -119,14 +119,16 @@ $user_email=$id_card->make_string($user_email,20);
                         </ul>
                     </li>
 
-                    <li><a href="javascript:void(0)" data-target=".setting" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-cogs side_bar_icon"></i> Setting<i class="fa fa-collapse"></i></a></li>
+                    <li><a href="javascript:void(0)" data-target=".setting" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-cogs side_bar_icon"></i> Settings<i class="fa fa-collapse"></i></a></li>
 
                     <li>
                         <ul class="setting nav nav-list collapse">
-                            <li><a href="setting.php" class="l_active"><span class="fa fa-caret-right"></span>Genaral Setting</a></li>
+                            <li><a href="setting.php" class="l_active"><span class="fa fa-caret-right"></span>General Settings</a></li>
 
                         </ul>
                     </li>
+
+                    <li><a href="logout.php" class="nav-header"><i class="fa fa-sign-out side_bar_icon"></i> Logout</a></li>
 
                     <?php } ?>
             </ul>

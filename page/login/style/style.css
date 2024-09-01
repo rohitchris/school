@@ -17,7 +17,7 @@ body, html {
 }
 .icon {
   padding: 10px;
-  background: #F64343;
+  background: #0097A7;
   color: white;
   height: 42px;
   font-size: 24px;
@@ -63,7 +63,7 @@ body, html {
 
 }
 .header_box{
-	background: #F64343;
+	background: #0097A7;
 	padding: 15px;
 	margin-bottom: 25px;
 	margin-top: -20px;
@@ -112,7 +112,7 @@ body, html {
 #login-box .controls input:focus {
 	box-shadow: none;
 	border-radius: 0px;
-	border: 1px solid #F64343;
+	border: 1px solid #0097A7;
 	border-width: 1px 1px 1px 0px;
 }
 #login-box .controls input:first-child {
@@ -127,7 +127,7 @@ body, html {
 	border-radius: 10px;
 	margin-top: 8px;
     padding: 10px;
-	background:#ff5252;
+	background:#8B0A1A;
 	font-size: 19px!important;
 	border-color: rgba(48, 46, 45, 1);
 	color: white;

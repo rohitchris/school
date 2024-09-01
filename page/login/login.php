@@ -23,13 +23,13 @@ $db=new database();
     <div class="col-md-4  col-sm-12"></div>
     <div class="col-md-4 col-sm-12">
     <div id="login-box" style="margin-top: 45px;">
-        <div class="header_box">Login Your ID</div>
+        <div class="header_box">Login with your ID...</div>
         <div class="logo">
             <h1 class="logo-caption"><?php echo $db->site_name; ?></h1>
         </div>
         <div id="loader_area" style="display: none;"><?php loader(); ?></div>
         <div class="controls" id="login_body">
-            <div id="error_msg" class="error_msg" style="color: #F64343;display: none;">
+            <div id="error_msg" class="error_msg" style="color: #0097A7;display: none;">
               <span class="glyphicon glyphicon-remove error_icon"></span><br/>
               <span id="error_msg_text"></span>
             </div>
@@ -45,7 +45,7 @@ $db=new database();
             
             <button type="submit" style="font-size: 16px;" id="login_btn" onclick="login()" name="login" class="btn btn-default btn-block btn-custom">Login</button> 
         </div>
-        <div class="footer_login" style="">Developed By: <a href="https://github.com/amirhamza05/Student-Management-System"><font style="font-size: 19px;font-weight: bold;color: #F64343">Amir Hamza</font></a></div>
+        <div class="footer_login" style="">Developed By: <a href="https://rohitconsultants.com" target="_blank"><font style="font-size: 19px;font-weight: bold;color: #0097A7">StudentMatrix</font></a></div>
     </div>
     
 
@@ -239,3 +239,6 @@ function loader(){
   transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
 }
 </style>
+<?php
+$db->closeConnection();
+?>
