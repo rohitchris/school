@@ -9,14 +9,27 @@ include "script/site_content/site_config.php";
 
 class site_content extends site_config
 {
+   
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
+
+public $barcode_ob;
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
+
     
     
     //starting connection
     
-    public function __construct()
+    public function __construct($db=null)
     {
         
-        $this->db         = new database();
+        $this->db         = $db;
         $this->conn       = $this->db->conn;
         $this->barcode_ob = new \Picqer\Barcode\BarcodeGeneratorPNG();
         

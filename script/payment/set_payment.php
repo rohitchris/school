@@ -3,17 +3,37 @@
 
 class set_payment {
    
+public $db;
+public $conn;
+public $result;
+public $user_ob;
+public $user;
+public $program_ob;
+public $program_info;
+public $student_ob;
+public $site;
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
+   
 
 //starting connection
 
- public function __construct(){
-     
-     $this->db=new database();
+ public function __construct($db=null){
+
+    if ($db) {
+      $this->db=$db;
+    }else{
+      $this->db=new database();
+    }
+
+
      $this->conn=$this->db->conn;
-     $this->program_ob=new program();
+     $this->program_ob=new program($this->db);
      $this->program_info=$this->program_ob->get_program_info();
-     $this->student_ob=new student();
-     $this->site=new site_content();
+     $this->student_ob=new student($this->db);
+     $this->site=new site_content($this->db);
 
  }
 
@@ -374,9 +394,6 @@ class set_payment {
  padding-right: 15px;
   float: left;
   width:50%;
-}
-.money_recept .right_body{
-
 }
   </style>
   <div class='money_recept'>

@@ -6,18 +6,35 @@
 
 class sms
 {
+   
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
     
     public $student;
     public $student_ob;
     public $login_user;
     
-    public function __construct($user_id)
+    public function __construct($db=null,$user_id=null)
     {
         
-        $this->db         = new database();
+        
+    if ($db) {
+      $this->db=$db;
+    }else{
+      $this->db=new database();
+    }
+
+
         $this->login_user = $this->db->login_user;
         $this->conn       = $this->db->conn;
-        $this->student_ob = new student();
+        $this->student_ob = new student($db);
         
         $this->login_user=$user_id;
     }

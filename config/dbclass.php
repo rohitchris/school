@@ -16,24 +16,24 @@ class dbclass {
 
  //conection start
 
- public function __construct(){
-     $this->connection();
+//  public function __construct(){
+//      $this->connection();
 
- }
+//  }
 
 
-public function connection(){
+// public function connection(){
 
-     $this->conn =mysqli_connect($this->host,$this->user,$this->pass,$this->db);
-if(!$this->conn){
-echo "Conection failed";
-}
+//      $this->conn =mysqli_connect("p:".$this->host,$this->user,$this->pass,$this->db);
+// if(!$this->conn){
+// die("DB Connection Failed: " . mysqli_connect_error());
+// }
 
-}
+// }
 
-public function select($query){
-return $this->result=mysqli_query($this->conn, $query);
-}
+// public function select($query){
+// return $this->result=mysqli_query($this->conn, $query);
+// }
 
 
 

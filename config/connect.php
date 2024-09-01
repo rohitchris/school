@@ -1,4 +1,3 @@
-
 <?php
 
 class database {
@@ -25,19 +24,51 @@ class database {
  //conection start
 
  public function __construct(){
-    $this->connection();
+
+
+  // $trace = debug_backtrace();
+  // if(isset($trace[1]['function'])) {
+  //     echo '<hr>Calling function: ' . print_r($trace[1])."  --  <hr>";
+  // }
+
+    $this->openConnection();
     $this->set_institute_info();
     date_default_timezone_set('Asia/Dhaka');
  }
 
+ 
+public function openConnection(){
+  $this->conn = mysqli_connect($this->host,$this->user,$this->pass,$this->db);
+  
+  // $_SESSION['count']+=1;
+  // echo "#".$_SESSION['count']." <b>Connection opened O</b><br>";
+  
+  if(!$this->conn){
+      die("Connection failed: ". mysqli_connect_error() ."<br>");
+  }
+}
 
-public function connection(){
+public function getConnection() {
+    if ($this->conn === null) {
+        $this->openConnection();
+    }
+    return $this->conn;
+}
 
-     $this->conn =mysqli_connect($this->host,$this->user,$this->pass,$this->db);
-     if(!$this->conn){
-       echo "Conection failed";
-     }
-     else return 1;
+public function closeConnection() {
+  // if(isset($trace[1]['function'])) {
+  //     echo '<hr>xxxxx Calling function: ' . print_r($trace[1])."  --  <hr>";
+  // }
+    if ($this->conn !== null) {
+      // echo "#".$_SESSION['count']." Connection closed x</b><br>";
+      // $_SESSION['count']-=1;
+        $this->conn->close();
+        $this->conn = null;
+    }
+}
+
+public function __destruct() {
+    $this->closeConnection();
 }
 
 public function date(){
@@ -57,7 +88,10 @@ public function set_login_user($uid,$ip,$browser){
 }
 
 public function select($query){
- return $this->result=mysqli_query($this->conn, $query);
+  if(!$this->conn){
+    $this->openConnection();
+  }
+  return $this->result=mysqli_query($this->conn, $query);
 }
 
 public function set_institute_info(){
@@ -223,11 +257,7 @@ public function get_previous_data($table,$id){
     if($flag==0)echo("Error description: " . mysqli_error($this->conn));
     if($msg=="no")return $flag;
   }
-  
 
-
-
-// conection end
 }
 
 ?>

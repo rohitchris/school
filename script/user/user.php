@@ -3,12 +3,28 @@
 
 class user {
    
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
+   
 
 //starting connection
 public $login_user_id;
- public function __construct($id=""){
-     $this->login_user_id=$id;
-     $this->db=new database();
+ public function __construct($db=null,$id=""){
+
+  
+    $this->login_user_id=$id;
+    if ($db) {
+      $this->db=$db;
+    }else{
+      $this->db=new database();
+    }
      $this->conn=$this->db->conn;
 
  }
@@ -85,10 +101,10 @@ public function get_user_permission_list($permit){
 public function user_permission_list(){
   $per=array();
   $sort_name=$this->db->sort_name;
-  $per[1]="TechSerm Super Admin";
-  $per[2]="TechSerm Admin";
-  $per[3]="TechSerm Manager";
-  $per[4]="TechSerm Engineer";
+  $per[1]="Super Admin";
+  $per[2]="Admin";
+  $per[3]="Manager";
+  $per[4]="Engineer";
   
   $per[6]="$sort_name Admin";
   $per[7]="$sort_name Accountant";

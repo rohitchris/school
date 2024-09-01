@@ -4,7 +4,7 @@ include "config/config.php";
 $db=new database();
 
 include 'script/user/user.php';
-$user_ob=new user();
+$user_ob=new user($db);
 $user=$user_ob->get_user_info();
 
 
@@ -50,5 +50,7 @@ if(isset($_POST['login'])){
 
 
 }
+
+$db->closeConnection();
 
 ?>

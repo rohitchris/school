@@ -3,6 +3,12 @@
 
 class id_card {
    
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
+   
 
 //starting connection
 
@@ -10,21 +16,30 @@ public $student;
 public $program;
 public $batch;
 
- public function __construct(){
-     
-     $this->db=new database();
-     $this->conn=$this->db->conn;
-    $batch_ob=new batch();
+ public function __construct($db=null){
+
+    if ($db) {
+      $this->db=$db;
+    }else{
+      $this->db=new database();
+    }
+
+    $this->conn=$this->db->conn;
+    $batch_ob=new batch($this->db);
     $this->batch=$batch_ob->batch_info();
 
-	$program_ob=new program();
-	$this->site=new site_content();
+	$program_ob=new program($this->db);
+	$this->site=new site_content($this->db);
 	$this->program=$program_ob->get_program_info();
 
-    $this->student_ob=new student();
+    $this->student_ob=new student($this->db);
     $this->student=$this->student_ob->get_student_info();
 
  }
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
 
  public function select($query){
    return $this->result=$this->db->select($query);
@@ -145,12 +160,12 @@ public function get_id_card($type="single"){
 	border-style: solid;
 	border-color: #2E363F;
 	border-width: 2px;
-	<?php echo "$float"; ?>
 	margin-right: 10px;
 	margin-bottom: 15px;
 	page-break-before: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
     page-break-after: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
     page-break-inside: avoid; 
+	<?php echo "$float"; ?>
 }
 
 .id_card .card_header{
@@ -223,10 +238,6 @@ public function get_id_card($type="single"){
 	border-width: 1px 0px 0px 0px;
 	border-color: #BDC1CB;
 	margin-top: 5px;
-
-}
-
-.id_card .box_body{
 
 }
 

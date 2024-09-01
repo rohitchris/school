@@ -3,27 +3,36 @@
 
 class id_card {
    
-
-//starting connection
-
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
 public $student;
 public $program;
 public $batch;
+public $site;
+public $student_ob;
 
- public function __construct(){
+ public function __construct($db=null){
      
-     $this->db=new database();
+     $this->db=$db;
      $this->conn=$this->db->conn;
-     $batch_ob=new batch();
+     $batch_ob=new batch($db);
      $this->batch=$batch_ob->batch_info();
-     $this->site=new site_content();
-	$program_ob=new program();
+     $this->site=new site_content($db);
+	$program_ob=new program($db);
 	$this->program=$program_ob->get_program_info();
 
-    $this->student_ob=new student();
+    $this->student_ob=new student($db);
     $this->student=$this->student_ob->get_student_info();
 
  }
+
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
 
  public function select($query){
    return $this->result=$this->db->select($query);
@@ -118,7 +127,7 @@ foreach ($data as $key => $info) {
   	<div style="float: left; margin-right: 5px;">
   		<img src="<?php echo $this->db->logo; ?>" class="card_logo">
   	</div>
-  	<div style="">
+  	<div>
   		<div class="font_name">
   			<?php echo "$title"; ?>	
   		</div>
@@ -261,7 +270,6 @@ public function id_card_css(){
 	border-radius: 0px;
 	border-style: solid;
 	border-color: #2E363F;
-	border-width: 
     float: left;
     
 	margin-bottom: 15px;

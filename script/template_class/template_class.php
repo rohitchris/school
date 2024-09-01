@@ -3,6 +3,16 @@
 
 class class_name {
    
+   
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
 
 //starting connection
 

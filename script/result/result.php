@@ -3,22 +3,38 @@
 
 class result {
    
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
+
 
 
 public $student;
 public $student_ob;
 public $exam;
 
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
+   
+
 //starting connection
 
- public function __construct(){
+ public function __construct($db=null){
      
-     $this->db=new database();
+    if ($db) {
+      $this->db=$db;
+    }else{
+      $this->db=new database();
+    }
      $this->conn=$this->db->conn;
-     $this->student_ob=new student();
-     $this->student=$this->student_ob->get_student_info();
-     $this->exam=new exam();
-     $this->exam=$this->exam->get_exam_info();
+    //  $this->student_ob=new student($this->db);
+    //  $this->student=$this->student_ob->get_student_info();
+    //  $this->exam=new exam($this->db);
+    //  $this->exam=$this->exam->get_exam_info();
 
  }
 

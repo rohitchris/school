@@ -3,20 +3,40 @@
 
 class program {
    
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
 
-//starting connection
 
 public $batch=array();
 public $subject=array();
 
- public function __construct(){
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
+   
+
+//starting connection
+
+ public function __construct($db=null){
      
-     $this->db=new database();
+    if ($db) {
+      $this->db=$db;
+    }else{
+      $this->db=new database();
+    }
+
+    
      $this->conn=$this->db->conn;
-     $this->batch=new batch();
-     $this->batch=$this->batch->batch_info();
-     $this->subject=new subject();
-     $this->subject=$this->subject->get_subject_info();
+
+    //  $batchOb=new batch($this->db);
+    //  $this->batch=$batchOb->batch_info();
+     
+    //  $subjectOb=new subject($this->db);
+    //  $this->subject=$subjectOb->get_subject_info();
 
  }
 
@@ -100,7 +120,7 @@ return $info;
  } 
  
 
-public function get_separate_program_info($select_value="*",$program_id){
+public function get_separate_program_info($select_value,$program_id){
   $sql="select $select_value from program where id=$program_id";
   $info=$this->db->get_sql_array($sql);
   if(isset($info[0]))$info=$info[0];

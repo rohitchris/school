@@ -6,6 +6,16 @@
 
 class student_edit {
    
+   
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
 
 //starting connection
 public $student_ob;
@@ -31,7 +41,8 @@ public $program;
 
 
 public function get_student_profile($student_id){
-  $info=$this->get_student_info();
+  $studOb = new student();
+  $info=$studOb->get_student_info();
   $info=$info[$student_id];
   $site_ob=new site_content();
   $barcode=$site_ob->barcode($student_id);
@@ -191,7 +202,8 @@ public function test_edit(){
 public function student_edit_form($id){
 	$site=new site_content();;
 	
-	$student=$this->get_student_info();
+  $studOb = new student();
+  $student=$studOb->get_student_info();
 	$info=$student[$id];
 	$name=$info['name'];
 	$nick=$info['nick'];
@@ -361,7 +373,7 @@ public function student_edit_form($id){
 
 <!-- End Academic Information -->
 
-       <button class="box_btn" name="update" type="submit" style=""><span class="glyphicon glyphicon-floppy-save"></span> Update Information</button>                  
+       <button class="box_btn" name="update" type="submit"><span class="glyphicon glyphicon-floppy-save"></span> Update Information</button>                  
     
 </form>
 

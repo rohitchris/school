@@ -6,13 +6,28 @@
 
 class batch
 {
+   
+public $db;
+public $conn;
+public $user_ob;
+public $user;
+public $result;
+
+public function __destruct(){
+  $this->db->closeConnection();
+}
 	
-	 public function __construct(){
+	 public function __construct($db=null){
      
-     $this->db=new database();
+    if ($db) {
+      $this->db=$db;
+    }else{
+      $this->db=new database();
+    }
      $this->conn=$this->db->conn;
      
  }
+
 
  public function select($query){
    return $this->result=$this->db->select($query);

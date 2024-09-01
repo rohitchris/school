@@ -11,14 +11,27 @@ class student extends student_edit
   public $program_ob;
   public $student_list;
 	
-	 public function __construct(){
+	 public function __construct($db=null){
      
-     $this->db=new database();
+     
+    if ($db) {
+      $this->db=$db;
+    }else{
+      $this->db=new database();
+    }
+
      $this->conn=$this->db->conn;
-     $this->program_ob=new program();
+
+
+     $this->program_ob=new program($this->db);
      $this->student_list=$this->get_student_info1();
      
  }
+
+
+  public function __destruct() {
+      $this->db->closeConnection();
+  }
 
  public function select($query){
    return $this->result=$this->db->select($query);
